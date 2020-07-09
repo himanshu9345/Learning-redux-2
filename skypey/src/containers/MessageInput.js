@@ -3,7 +3,6 @@ import store from "../store";
 import { setTypingValue, sendMessage } from "../actions";
 import "./MessageInput.css";
 
-const state = store.getState();
 const MessageInput = ({ value }) => {
   const handleChange = (e) => {
     store.dispatch(setTypingValue(e.target.value));
