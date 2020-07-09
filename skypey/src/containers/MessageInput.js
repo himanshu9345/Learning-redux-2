@@ -1,15 +1,16 @@
 import React from "react";
 import store from "../store";
-import { setTypingValue } from "../actions";
+import { setTypingValue, sendMessage } from "../actions";
 import "./MessageInput.css";
 
+const state = store.getState();
 const MessageInput = ({ value }) => {
   const handleChange = (e) => {
     store.dispatch(setTypingValue(e.target.value));
   };
 
   return (
-    <form className="Message">
+    <form className="Message" onSubmit={handleSubmit}>
       <input
         className="Message__input"
         onChange={handleChange}
@@ -18,6 +19,12 @@ const MessageInput = ({ value }) => {
       />
     </form>
   );
+};
+const handleSubmit = (e) => {
+  e.preventDefault();
+  const { typing, activeUserId } = store.getState();
+  console.log(typing, activeUserId, "gg");
+  store.dispatch(sendMessage(typing, activeUserId));
 };
 
 export default MessageInput;
